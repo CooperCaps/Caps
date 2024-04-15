@@ -105,7 +105,6 @@ b, strong {
   margin: 0 auto;
   overflow: hidden;
   position: fixed;
-  min-height: 350px;
   z-index: 1;
   /* Manually adjust position */
   top: 40%; /* Adjust vertically */
