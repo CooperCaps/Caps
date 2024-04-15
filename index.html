@@ -19,8 +19,8 @@
 
       <ul class="pip-foot">
         <li class="active"><a href="#items" data-toggle="tab">Items</a></li>
-        <li><a href="#stats" data-toggle="tab">Stats</a></li>
-        <li><a href="#quests" data-toggle="tab">Quests</a></li>
+        <li><a href="#stats" data-toggle="tab">Stake</a></li>
+        <li><a href="#quests" data-toggle="tab">Swap</a></li>
         <li><a href="#misc" data-toggle="tab">Misc</a></li>
         <li><a href="#radio" data-toggle="tab">Radio</a></li>
       </ul>
@@ -30,30 +30,29 @@
         <div class="tab-pane fade in active" id="items">
           <h3 class="pip-title">Items</h3>
           <ul class="pip-head">
-            <li><b>Wg</b> 34/125</li>
-            <li><b>HP</b> 89/110</li>
-            <li><span class="fade-a"><b>DT</b> 21</span><span class="fade-b"><b>DR</b> 11</span></li>
-            <li><b>Caps</b> 1721</li>
+          <li><b>Address</b> <span id="address" onclick="connectWallet()">CONNECT</span></li>
+            <li><b>HP</b> ???</li>
+            <li><span class="fade-a"><b>DT</b> ???</span><span class="fade-b"><b>DR</b> ???</span></li>
+            <li><b>Caps</b> 0</li>
           </ul>
           <div class="pip-body">
             <ul class="options">
-              <li><input type="radio" id="radio1" name="radio">
-                <label for="radio1">Brass Knuckles</label>
+              <li class="disabled"><input type="radio" id="radio1" name="radio">
+                <label for="radio1">Brass Knuckles </label>
               </li>
-              <li><input type="radio" checked="checked" id="radio2" name="radio">
+              <li class="disabled"><input type="radio" checked="checked" id="radio2" name="radio">
                 <label for="radio2">Hunting Rifle</label>
               </li>
-              <li><input type="radio" id="radio3" name="radio">
+              <li class="disabled"><input type="radio" id="radio3" name="radio">
                 <label for="radio3">Long Fuse Dynamite (11)</label>
               </li>
-              <li><input type="radio" id="radio4" name="radio">
-                <label for="radio4">Plasma Pistol</label>
+              <li class="disabled"><input type="radio" id="radio4" name="radio">
+                <label for="radio4">Plasma Pistol <label>
               </li>
             </ul>
             <div class="info">
               <div class="right-options">
-                <a href="#" class="disabled">Maintain</a>
-                <a href="#">Mod</a>
+                <a href="#" class="disabled">Mint NFT</a>
               </div>
               <div class="info-body">
                 <ul class="info-table">
@@ -61,50 +60,50 @@
                     <div class="item-icon"><span class="icon"><img class="filter" src="https://cybersandbox.ca/resources/556mm_round_icon.png"></span>0</div>
                     <div class="vboy filter"></div>
                   </li>
-                  <li><b>STR</b> 6</li>
-                  <li class="clear"><span class="fade-a"><b>DAM</b> 52</span><span class="fade-b"><b>DPS</b> 49.3</span></li>
-                  <li><b>WG</b> 6.00</li>
-                  <li><b>VAL</b> 2528</li>
+                  <li><b>STR</b> ???</li>
+                  <li class="clear"><span class="fade-a"><b>DAM</b> ???</span><span class="fade-b"><b>DPS</b> ???</span></li>
+                  <li><b>WG</b> ???</li>
+                  <li><b>VAL</b> ???</li>
                   <li><b>CND</b> <span class="condition"><span class="fill" style="width: 83%;"></span></span></li>
-                  <li class="span-2">.308 round (5/72)</li>
+                  <li class="span-2">No Ammo</li>
                 </ul>
-                <p class="extra"><b>MODS</b> Hunting Rifle Scope</p>
+                <p class="extra"><b>MODS</b> ???</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="tab-pane fade" id="stats">
-          <h3 class="pip-title">Stats</h3>
+          <h3 class="pip-title">Stake</h3>
           <ul class="pip-head">
-            <li><b>LVL</b> 11</li>
-            <li><b>HP</b> 89/110</li>
-            <li><b>AP</b> 38/40</li>
-            <li><b>XP</b> 73.8%</li>
+            <li><b>DEPOSITED</b> --</li>
+            <li><b>CLAIMED</b> ---</li>
+            <li><b>CLAIMABLE</b> ---</li>
+            <li><b>APY</b> 73.8%</li>
           </ul>
           <div class="pip-body">
             <ul class="side-menu">
-              <li class="active"><a href="#cnd" data-toggle="tab">CND</a></li>
-              <li><a href="#rad" data-toggle="tab">RAD</a></li>
-              <li><a href="#eff" data-toggle="tab">EFF</a></li>
-              <li class="disabled"><a href="#">H20</a></li>
-              <li class="disabled"><a href="#">FOD</a></li>
-              <li class="disabled"><a href="#">SLP</a></li>
+              <li class="active"><a href="#cnd" data-toggle="tab">EARN</a></li>
+              <li><a href="#rad" data-toggle="tab">CAPS</a></li>
+              <li><a href="#eff" data-toggle="tab">CAPS/ETH</a></li>
+              <li class="disabled"><a href="#">CAPS/USDT</a></li>
+              <li class="disabled"><a href="#">//Null</a></li>
+              <li class="disabled"><a href="#">//Null</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade in active" id="cnd">
                 <div class="stats-page">
-                  <h4>Condition</h4>
+                  <h4>Rewards</h4>
 
                   <div class="right-options">
-                    <a href="#">(4) Stimpak</a>
-                    <a href="#" class="disabled">(0) Doctor's Bag</a>
+                    <a href="#">(0) CAPS EARNED</a>
+                    
                   </div>
                 </div>
               </div>
               <div class="tab-pane fade" id="rad">
                 <div class="stats-page">
-                  <h4>Radiation</h4>
+                  <h4>DETAILS</h4>
                   <ul>
                     <li>No data.</li>
                   </ul>
@@ -112,22 +111,10 @@
               </div>
               <div class="tab-pane fade" id="eff">
                 <div class="stats-page">
-                  <h4>Effects</h4>
+                  <h4>DETAILS</h4>
                   <ul>
                     <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
-                    <li>No data.</li>
+               
                   </ul>
                 </div>
               </div>
@@ -136,18 +123,18 @@
         </div>
 
         <div class="tab-pane fade" id="quests">
-          <h3 class="pip-title">Quests</h3>
+          <h3 class="pip-title">Swap</h3>
           <div class="pip-body">
             <ul class="options">
-              <li class="active"><a href="#quest-1" data-toggle="tab">Le Courier In Le Mojav</a></li>
-              <li><a href="#quest-2" data-toggle="tab">comign soon. 2022.</a></li>
+              <li class="active"><a href="#quest-1" data-toggle="tab">Coming Soon</a></li>
+              <li class="disabled" data-toggle="tab">//Null</a></li>
               <li class="disabled"><label>//Null</labe>
               </li>
             </ul>
             <div class="tab-content">
               <div class="info tab-pane active fade in" id="quest-1">
                 <div class="post">
-                  <p>Who dat damn ghuy who shot me,,,, I ain't dead.... yet.... </p>
+                  <p>Swap Caps for ETH and other tokens directly in your pipboy </p>
                 </div>
               </div>
 
@@ -166,8 +153,8 @@
           <div class="pip-body">
             <ul class="options">
               <li class="active"><a href="#misc-1" data-toggle="tab">Backlight Color</a></li>
-              <li><a href="#misc-2" data-toggle="tab">Where does it come from?</a></li>
-              <li><a href="#misc-3" data-toggle="tab">Why do we use it?</a></li>
+              <li><a href="#misc-2" data-toggle="tab">Airdrop</a></li>
+              <li><a href="#misc-3" data-toggle="tab">The Story</a></li>
             </ul>
             <div class="tab-content">
               <div class="info active tab-pane fade in" id="misc-1">
@@ -192,8 +179,7 @@
 
               <div class="info tab-pane fade" id="misc-2">
                 <div class="post">
-                  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-                  <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                  <p>Patricipate in the CAPS airdrop. Any adderss can contribute $1 to claim the airdrop. All funds are directly added to initial liquidity. This helps fund initial liquidity while also keeping an even fair distribution</p>
                 </div>
               </div>
 
@@ -207,22 +193,65 @@
           </div>
         </div>
 
-        <div class="tab-pane fade" id="radio">
-          <h3 class="pip-title">Radio</h3>
-          <div class="pip-body">
-            <ul class="options">
-              <li><input type="checkbox" id="check" checked><label for="check">00_default</label></li>
-              <li class="disabled"><label>//Null</label></li>
-              <li class="disabled"><label>//Null</labe>
-              </li>
-            </ul>
-            <div class="info">
-              <div class="post">
-                No data.
-              </div>
-            </div>
-          </div>
-        </div>
+          <style>
+    /* Custom CSS styles */
+    #musicPlayer {
+display: none;
+    }
+
+  </style>
+
+  <div class="tab-pane fade" id="radio">
+    <h3 class="pip-title">Radio</h3>
+    <div class="pip-body">
+      <ul class="options">
+        <!-- Add more songs as needed -->
+        <li><input type="checkbox" id="song1"><label for="song1">Accentuate The Positive</label></li>
+        <li><input type="checkbox" id="song2"><label for="song2">Atom Bomb Baby</label></li>
+        <li><input type="checkbox" id="song3"><label for="song3">Youre A Grand Old Flag</label></li>
+        <li><input type="checkbox" id="song4"><label for="song4">Uranium Fever</label></li>
+        <li><input type="checkbox" id="disabled"><label for="disabled" class="disabled">//Null</label></li>
+        <li><input type="checkbox" id="disabled"><label for="disabled" class="disabled">//Null</label></li>
+
+      </ul>
+      <div class="info">
+        <audio id="musicPlayer" controls>
+          <source src="" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const musicPlayer = document.getElementById('musicPlayer');
+    const songs = {
+      'song1': 'Johnny Mercer  Accentuate The Positive.mp3',
+      'song2': 'AtomBombBaby.mp3',
+      'song3': 'Billy Murray  Youre A Grand Old Flag Bioshock Infinite Debut Trailer.mp3',
+      'song4': 'Elton Britt  Uranium Fever.mp3'
+    };
+
+    // Function to play a selected song
+    function playSong(songId) {
+      if (songs[songId]) {
+        musicPlayer.src = songs[songId];
+        musicPlayer.play();
+      }
+    }
+
+    // Event listener for song selection
+    document.querySelectorAll('.options input[type="checkbox"]').forEach(input => {
+      input.addEventListener('change', () => {
+        if (input.checked) {
+          playSong(input.id);
+        } else {
+          musicPlayer.pause();
+        }
+      });
+    });
+  </script>
 
       </div>
 
@@ -234,8 +263,36 @@
   </div>
 </div>
 <!-- partial -->
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script><script  src="./script.js"></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
+<script src="./script.js"></script>
+<script>
+  // JavaScript code
+  function updateWalletInfo(address) {
+    const addressElement = document.getElementById('address');
+    addressElement.textContent = address.slice(0, 6) + '....' + address.slice(-6);
+  }
+
+  function connectWallet() {
+    // Check if Web3 is injected by MetaMask
+    if (typeof window.ethereum !== 'undefined') {
+      // Request account access if not already granted
+      window.ethereum.request({ method: 'eth_requestAccounts' })
+        .then(accounts => {
+          const userAddress = accounts[0]; // Get the first account
+          updateWalletInfo(userAddress);
+        })
+        .catch(error => {
+          console.error('Error connecting to wallet:', error);
+        });
+    } else {
+      console.error('MetaMask is not installed');
+    }
+  }
+
+  // Add event listener to the "CONNECT" span
+  document.getElementById('address').addEventListener('click', connectWallet);
+</script>
 
 </body>
 </html>
