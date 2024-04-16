@@ -127,6 +127,22 @@ b, strong {
   }
 }
 
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  .overlay-image {
+    display: none; /* Hide the overlay image on mobile */
+  }
+
+  .frame {
+    width: 80%; /* Set frame width to 100% on mobile */
+    height: 100%; /* Set frame height to 100% on mobile */
+    top: 50%; /* Adjust vertical position */
+    left: 50%; /* Adjust horizontal position */
+    transform: translate(-50%, -50%); /* Center the element */
+    border-radius: 0; /* Remove border radius */
+  }
+}
+
 .output {
   -webkit-animation: crt-output 10ms infinite;
   animation: crt-output 10ms infinite;
