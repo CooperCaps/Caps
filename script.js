@@ -1,3 +1,65 @@
+var app = new Vue({
+  el: '#app',
+  data() {
+    return {
+      web3Object: null,
+      balance: 0
+    }
+  },
+
+  async mounted() {
+    const Web3Modal = window.Web3Modal.default;
+    const providerOptions = {
+      walletconnect: {
+        package: window.WalletConnectProvider.default,
+        options: {
+          rpc: {
+            1337: 'https://127.0.0.1:1923'
+          },
+          chainId: 1337,
+          infuraId: 'd85fda7b424b4212ba72f828f48fbbe1',
+          pollingInterval: '10000'
+        }
+      }
+    }
+
+    this.web3Modal = new Web3Modal({
+      providerOptions,
+      cacheProvider: true,
+      disableInjectedProvider: false
+    });
+
+    if (this.web3Modal.cachedProvider) {
+      await this.onConnect();
+    }
+  },
+
+  methods: {
+    async onConnect() {
+      try {
+        let provider = await this.web3Modal.connect();
+        this.onProvider(provider);
+      } catch (e) {
+        console.log('Could not get a wallet connection', e);
+        return;
+      }
+    },
+
+    async onProvider(provider) {
+      this.web3Object = new Web3(provider);
+
+      // Get balance
+      if (this.web3Object) {
+        let accounts = await this.web3Object.eth.getAccounts();
+        if (accounts && accounts.length > 0) {
+          let balance = await this.web3Object.eth.getBalance(accounts[0]);
+          this.balance = this.web3Object.utils.fromWei(balance, 'ether');
+        }
+      }
+    }
+  }
+});
+
 var r = document.querySelector(":root");
 var colors = document.getElementsByName("colors");
 function getColor() {
@@ -109,49 +171,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function removeShow() {
     cursor.classList.remove("cursor-default");
-  }
-  
-  // Check if Web3 provider is available
-  if (window.ethereum) {
-    // Initialize ethers.js with Web3 provider
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-    // Contract address and ABI
-    const contractAddress = '0x0F7A8a7DFDc56dA7F9185e110Eb55Fc7CaCC5c06';
-    const contractABI = [
-      // ABI of the balanceOf function
-      {
-        "constant": true,
-        "inputs": [{"name": "_owner", "type": "address"}],
-        "name": "balanceOf",
-        "outputs": [{"name": "balance", "type": "uint256"}],
-        "type": "function"
-      }
-    ];
-
-    // Create contract instance
-    const contract = new ethers.Contract(contractAddress, contractABI, provider);
-
-    // Function to fetch and display balance
-    async function displayBalance() {
-      try {
-        // Get connected address
-        const accounts = await provider.listAccounts();
-        const connectedAddress = accounts[0];
-
-        // Call balanceOf function
-        const balance = await contract.balanceOf(connectedAddress);
-        console.log('balance', balance);
-
-        // Update DOM with balance
-        const capsElement = document.getElementById('caps');
-        capsElement.textContent = balance.toString();
-      } catch (error) {
-        console.error('Error fetching balance:', error);
-      }
-    }
-
-    // Call displayBalance function when the page loads
-    window.onload = displayBalance;
   }
 });
