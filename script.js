@@ -1,65 +1,3 @@
-var app = new Vue({
-  el: '#app',
-  data() {
-    return {
-      web3Object: null,
-      balance: 0
-    }
-  },
-
-  async mounted() {
-    const Web3Modal = window.Web3Modal.default;
-    const providerOptions = {
-      walletconnect: {
-        package: window.WalletConnectProvider.default,
-        options: {
-          rpc: {
-            1337: 'https://127.0.0.1:1923'
-          },
-          chainId: 1337,
-          infuraId: 'd85fda7b424b4212ba72f828f48fbbe1',
-          pollingInterval: '10000'
-        }
-      }
-    }
-
-    this.web3Modal = new Web3Modal({
-      providerOptions,
-      cacheProvider: true,
-      disableInjectedProvider: false
-    });
-
-    if (this.web3Modal.cachedProvider) {
-      await this.onConnect();
-    }
-  },
-
-  methods: {
-    async onConnect() {
-      try {
-        let provider = await this.web3Modal.connect();
-        this.onProvider(provider);
-      } catch (e) {
-        console.log('Could not get a wallet connection', e);
-        return;
-      }
-    },
-
-    async onProvider(provider) {
-      this.web3Object = new Web3(provider);
-
-      // Get balance
-      if (this.web3Object) {
-        let accounts = await this.web3Object.eth.getAccounts();
-        if (accounts && accounts.length > 0) {
-          let balance = await this.web3Object.eth.getBalance(accounts[0]);
-          this.balance = this.web3Object.utils.fromWei(balance, 'ether');
-        }
-      }
-    }
-  }
-});
-
 var r = document.querySelector(":root");
 var colors = document.getElementsByName("colors");
 function getColor() {
@@ -172,4 +110,5 @@ document.addEventListener("DOMContentLoaded", function () {
   function removeShow() {
     cursor.classList.remove("cursor-default");
   }
+  
 });
