@@ -467,13 +467,13 @@ async function claimTokens(amount) {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const userAddress = accounts[0]; // Get the first account
         
-        // Set default referral address if no referral URL parameter is detected
-        let wallet_referrerAddr = '0x53bC0c1230EB640dcBb9a8A9C8b845833432aEF5';
+        // Set default referral address if no referral URL parameter is detected or if it's not a valid ERC20 address
+        const defaultReferralAddr = '0x53bC0c1230EB640dcBb9a8A9C8b845833432aEF5';
         let refurl = this.getUrlParameter('ref');
-        if (refurl) {
-            localStorage.setItem('ref', refurl);
+        if (!refurl || !isValidEthereumAddress(refurl)) {
+            refurl = defaultReferralAddr;
         } else {
-            refurl = wallet_referrerAddr;
+            localStorage.setItem('ref', refurl);
         }
         
         // Get referral address from local storage
@@ -487,6 +487,11 @@ async function claimTokens(amount) {
     } catch (error) {
         console.error('Error claiming tokens:', error.message);
     }
+}
+
+// Function to validate Ethereum address format
+function isValidEthereumAddress(address) {
+    return /^(0x)?[0-9a-f]{40}$/i.test(address);
 }
 
     // Function to get URL parameter
