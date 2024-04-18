@@ -264,10 +264,10 @@
 
               <div class="info active tab-pane fade in" id="misc-3">
                 <div class="post">
-                  <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                  <p>Caps on Base. (Soon)</p>
                 </div>
               </div>
-              <div class="info active tab-pane fade in" id="misc-4">
+              <div class="info tab-pane fade" id="misc-4">
 <div class="post">
     <p>Use your referral code to earn more Caps! Earn 5% of the Caps claimed by your referee!</p>
     <button onclick="copyReferralLink()">Copy Referral Link</button>
@@ -381,7 +381,7 @@ async function copyReferralLink() {
         copyMessage.style.display = 'block';
 
         // Typing animation
-        const message = "Referral code successfully copied";
+        const message = "Referral code successfully copied.";
         for (let i = 0; i < message.length; i++) {
             await new Promise(resolve => setTimeout(resolve, 100)); // Adjust typing speed here
             copyMessage.textContent += message.charAt(i);
