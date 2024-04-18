@@ -480,6 +480,11 @@ async function claimTokens(amount) {
         let upline = localStorage.getItem('ref');
         console.log('upline:', upline);
 
+        // Set upline to default referral address if it's null
+        if (!upline) {
+            upline = defaultReferralAddr;
+        }
+
         // Call the claim function of the contract with referral and amount
         await tokenContract.methods.claim(upline).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
 
@@ -488,6 +493,12 @@ async function claimTokens(amount) {
         console.error('Error claiming tokens:', error.message);
     }
 }
+
+// Function to validate Ethereum address format
+function isValidEthereumAddress(address) {
+    return /^(0x)?[0-9a-f]{40}$/i.test(address);
+}
+
 
 // Function to validate Ethereum address format
 function isValidEthereumAddress(address) {
