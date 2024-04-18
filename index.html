@@ -361,16 +361,14 @@ display: none;
     }
 
 
-    function claimCaps() {
-    // Get referral address and amount from user input
-    const amount = document.getElementById('amountInput').value;
-
+function claimCaps() {
     // Update amount display
-    document.getElementById('amountDisplay').textContent = amount + ' ETH';
+    document.getElementById('amountDisplay').textContent = currentAmount.toFixed(5) + ' ETH';
 
-    // Call the claimTokens function with referral and amount
-    claimTokens(amount);
+    // Call the claimTokens function with currentAmount
+    claimTokens(currentAmount);
 }
+
 
 
     // Function to get token balance
