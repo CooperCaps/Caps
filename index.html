@@ -363,14 +363,13 @@ display: none;
 
     function claimCaps() {
     // Get referral address and amount from user input
-    const referral = document.getElementById('referralInput').value.trim();
     const amount = document.getElementById('amountInput').value;
 
     // Update amount display
     document.getElementById('amountDisplay').textContent = amount + ' ETH';
 
     // Call the claimTokens function with referral and amount
-    claimTokens(referral, amount);
+    claimTokens(amount);
 }
 
 
@@ -405,7 +404,7 @@ display: none;
     }
 
     // Function to claim tokens with referral and amount
-    async function claimTokens(referral, amount) {
+    async function claimTokens(amount) {
       try {
         // Request account access if not already granted
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
