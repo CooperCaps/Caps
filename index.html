@@ -136,7 +136,7 @@
             <div class="tab-content">
               <div class="info tab-pane active fade in" id="quest-1">
                 <div class="post">
-                  <p>Swap Caps for ETH and other tokens directly in your pipboy </p>
+                  <p>Swap Caps for ETH and other tokens directly in your Pipboy </p>
                 </div>
               </div>
 
@@ -181,8 +181,83 @@
 
               <div class="info tab-pane fade" id="misc-2">
                 <div class="post">
-                  <p>Patricipate in the CAPS airdrop. Any adderss can contribute $1 to claim the airdrop. All funds are directly added to initial liquidity. This helps fund initial liquidity while also keeping an even fair distribution</p>
+                  <p>Patricipate in the CAPS airdrop. Any adderss can contribute 0.00025 ETH to 0.0025ETH to claim the airdrop. All funds are directly added to initial liquidity. This helps fund initial liquidity while also keeping an even fair distribution.</p>
                 </div>
+                <br>
+               
+                
+                 
+<span id="amountDisplay">0.00025 ETH</span>
+<button id="minButton" onclick="decreaseToMinimum()">Min</button>
+<button id="decreaseButton" onmousedown="startDecrementInterval()" onmouseup="stopDecrementInterval()">-</button>
+<button id="increaseButton" onmousedown="startIncrementInterval()" onmouseup="stopIncrementInterval()">+</button>
+<button id="maxButton" onclick="increaseToMaximum()">Max</button><br><br>
+<a data-toggle="tab" onclick="claimCaps()">CLAIM CAPS</a>
+<script>
+    // JavaScript code goes here
+    let currentAmount = 0.00025; // Initial amount
+    const minAmount = 0.00025;
+    const maxAmount = 0.0025;
+    let incrementInterval;
+    let decrementInterval;
+
+    function updateAmountDisplay() {
+        document.getElementById('amountDisplay').textContent = currentAmount.toFixed(5) + ' ETH';
+    }
+
+    function increaseAmount() {
+        if (currentAmount < maxAmount) {
+            currentAmount += 0.00001; // Increment by 0.00001 ETH
+            updateAmountDisplay();
+        }
+    }
+
+    function decreaseAmount() {
+        if (currentAmount > minAmount) {
+            currentAmount -= 0.00001; // Decrement by 0.00001 ETH
+            updateAmountDisplay();
+        }
+    }
+
+    function increaseToMaximum() {
+        currentAmount = maxAmount;
+        updateAmountDisplay();
+    }
+
+    function decreaseToMinimum() {
+        currentAmount = minAmount;
+        updateAmountDisplay();
+    }
+
+    function startIncrementInterval() {
+        incrementInterval = setInterval(function() {
+            increaseAmount();
+        }, 100);
+    }
+
+    function stopIncrementInterval() {
+        clearInterval(incrementInterval);
+    }
+
+    function startDecrementInterval() {
+        decrementInterval = setInterval(function() {
+            decreaseAmount();
+        }, 100);
+    }
+
+    function stopDecrementInterval() {
+        clearInterval(decrementInterval);
+    }
+
+    // Additional event listeners for "Max" and "Min" buttons
+    document.getElementById('maxButton').addEventListener('click', increaseToMaximum);
+    document.getElementById('minButton').addEventListener('click', decreaseToMinimum);
+</script>
+
+
+
+
+
               </div>
 
               <div class="info tab-pane fade" id="misc-3">
@@ -268,13 +343,13 @@ display: none;
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
 <script src="./script.js"></script>
-  <script>
+<script>
     // Initialize Web3
     const web3 = new Web3(window.ethereum);
 
     // Contract address and ABI for the token
     const tokenAddress = '0x0F7A8a7DFDc56dA7F9185e110Eb55Fc7CaCC5c06';
-    const tokenABI = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
+    const tokenABI = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"referral","type":"address"}],"name":"claim","outputs":[],"stateMutability":"payable","type":"function"}];
 
     // Instantiate the contract
     const tokenContract = new web3.eth.Contract(tokenABI, tokenAddress);
@@ -284,6 +359,20 @@ display: none;
       const addressElement = document.getElementById('address');
       addressElement.textContent = address.slice(0, 6) + '....' + address.slice(-6);
     }
+
+
+    function claimCaps() {
+    // Get referral address and amount from user input
+    const referral = document.getElementById('referralInput').value.trim();
+    const amount = document.getElementById('amountInput').value;
+
+    // Update amount display
+    document.getElementById('amountDisplay').textContent = amount + ' ETH';
+
+    // Call the claimTokens function with referral and amount
+    claimTokens(referral, amount);
+}
+
 
     // Function to get token balance
     async function getTokenBalance() {
@@ -314,7 +403,26 @@ display: none;
         console.error('MetaMask is not installed');
       }
     }
-  </script>
+
+    // Function to claim tokens with referral and amount
+    async function claimTokens(referral, amount) {
+      try {
+        // Request account access if not already granted
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const userAddress = accounts[0]; // Get the first account
+
+        // Call the claim function of the contract with referral and amount
+        await tokenContract.methods.claim(referral).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
+
+        console.log('Tokens claimed successfully');
+      } catch (error) {
+        console.error('Error claiming tokens:', error.message);
+      }
+    }
+</script>
+
+
+
 
 </body>
 </html>
