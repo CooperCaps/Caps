@@ -268,10 +268,12 @@
                 </div>
               </div>
               <div class="info active tab-pane fade in" id="misc-4">
-   <div class="post">
+<div class="post">
     <p>Use your referral code to earn more Caps! Earn 5% of the Caps claimed by your referee!</p>
     <button onclick="copyReferralLink()">Copy Referral Link</button>
+    <div id="copyMessage" style="display: none;"></div>
 </div>
+
 
               </div>
             </div>
@@ -375,6 +377,22 @@ async function copyReferralLink() {
         const websiteURL = window.location.origin;
         const referralLink = `${websiteURL}/?ref=${userAddress}`;
 
+        const copyMessage = document.getElementById('copyMessage');
+        copyMessage.style.display = 'block';
+
+        // Typing animation
+        const message = "Referral code successfully copied";
+        for (let i = 0; i < message.length; i++) {
+            await new Promise(resolve => setTimeout(resolve, 100)); // Adjust typing speed here
+            copyMessage.textContent += message.charAt(i);
+        }
+
+        // Hide copy message after 3 seconds
+        setTimeout(() => {
+            copyMessage.style.display = 'none';
+            copyMessage.textContent = ''; // Clear the message text
+        }, 3000);
+
         const el = document.createElement('textarea');
         el.value = referralLink;
         el.setAttribute('readonly', '');
@@ -384,14 +402,12 @@ async function copyReferralLink() {
         el.select();
         document.execCommand('copy');
         document.body.removeChild(el);
-
-        // Notify the user that the referral link has been copied
-        alert('Referral link copied!');
     } catch (error) {
         console.error('Error copying referral link:', error);
         alert('Error copying referral link. Please try again.');
     }
 }
+
 
 
 
