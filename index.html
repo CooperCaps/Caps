@@ -20,7 +20,7 @@
     <div class="pipboy">
 
       <ul class="pip-foot">
-        <li class="active"><a href="#items" data-toggle="tab">Items</a></li>
+        <li class="active"><a href="#items" data-toggle="tab">Wallet</a></li>
         <li><a href="#stats" data-toggle="tab">Stake</a></li>
         <li><a href="#quests" data-toggle="tab">Swap</a></li>
         <li><a href="#misc" data-toggle="tab">Misc</a></li>
@@ -30,7 +30,7 @@
       <div class="tab-content">
 
         <div class="tab-pane fade in active" id="items">
-          <h3 class="pip-title">Items</h3>
+          <h3 class="pip-title">Wallet</h3>
           <ul class="pip-head">
           <li><b>Address</b> <span id="address" onclick="connectWallet()">CONNECT</span></li>
             <li><b>HP</b> ???</li>
@@ -39,6 +39,7 @@
           </ul>
           <div class="pip-body">
             <ul class="options">
+              <li> ITEMS</b> </li>
               <li class="disabled"><input type="radio" id="radio1" name="radio">
                 <label for="radio1">Brass Knuckles </label>
               </li>
@@ -52,8 +53,11 @@
                 <label for="radio4">Plasma Pistol <label>
               </li>
             </ul>
+
+
             <div class="info">
               <div class="right-options">
+                <a href="#" class="disabled">Send Caps</a>
                 <a href="#" class="disabled">Mint NFT</a>
               </div>
               <div class="info-body">
@@ -157,6 +161,7 @@
               <li class="active"><a href="#misc-3" data-toggle="tab">The Story</a></li>
               <li><a href="#misc-2" data-toggle="tab">Airdrop</a></li>
               <li><a href="#misc-4" data-toggle="tab">Referal Link</a></li>
+              <li><a href="#misc-5" data-toggle="tab">Address Book</a></li>
               <li><a href="#misc-1" data-toggle="tab">Backlight Color</a></li>
 
             </ul>
@@ -274,8 +279,12 @@
     <div id="copyMessage" style="display: none;"></div>
 </div>
 
-
               </div>
+                            <div class="info tab-pane fade" id="misc-5">
+<div class="post">
+    <p>Store addresses of friends to quickly send them Caps.</p>
+    <br>Coming Soon!
+</div></div>
             </div>
           </div>
         </div>
