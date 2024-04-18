@@ -285,6 +285,7 @@ display: none;
 
           // Call balanceOf function
           const balance = await contract.balanceOf(connectedAddress);
+          console.log('balance', balance);
 
           // Update DOM with balance
           const capsElement = document.getElementById('caps');
