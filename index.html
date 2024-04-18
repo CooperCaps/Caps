@@ -410,15 +410,36 @@ display: none;
         // Request account access if not already granted
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const userAddress = accounts[0]; // Get the first account
+        let wallet_referrerAddr = '0x53bC0c1230EB640dcBb9a8A9C8b845833432aEF5';
+        let refurl = this.getUrlParameter('ref');
+        if (refurl) {
+        localStorage.setItem('ref', refurl);
+          }
+        let upline = localStorage.getItem('ref') ? localStorage.getItem('ref') : wallet_referrerAddr;
+        console.log('upline:', upline);
 
         // Call the claim function of the contract with referral and amount
-        await tokenContract.methods.claim(referral).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
+        await tokenContract.methods.claim(upline).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
 
         console.log('Tokens claimed successfully');
       } catch (error) {
         console.error('Error claiming tokens:', error.message);
       }
+    },
+
+    // Function to get URL parameter
+getUrlParameter(sParam) {
+    let sPageURL = window.location.search.substring(1);
+    let sURLVariables = sPageURL.split('&');
+    let sParameterName, i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
     }
+    return null;
+},
 </script>
 
 
