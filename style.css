@@ -121,7 +121,7 @@ b, strong {
     width: 100%; /* Set frame width to 100% on mobile */
     height: 100%; /* Set frame height to 100% on mobile */
    max-height: 1000px;
-    top: 0%; /* Adjust vertical position */
+    top: 20%; /* Adjust vertical position */
     left: 50%; /* Adjust horizontal position */
     transform: translate(-50%, -50%); /* Center the element */
     border-radius: 0; /* Remove border radius */
