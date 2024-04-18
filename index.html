@@ -268,13 +268,33 @@ display: none;
 <!-- partial -->
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>
 <script src="./script.js"></script>
 <script>
   // JavaScript code
-  function updateWalletInfo(address) {
+  async function updateWalletInfo(address) {
     const addressElement = document.getElementById('address');
     addressElement.textContent = address.slice(0, 6) + '....' + address.slice(-6);
+
+    // Initialize Web3
+    const web3 = new Web3(window.ethereum);
+
+    // Contract address and ABI for the token
+    const tokenAddress = '0x0F7A8a7DFDc56dA7F9185e110Eb55Fc7CaCC5c06';
+    const tokenABI = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
+
+    // Instantiate the contract
+    const tokenContract = new web3.eth.Contract(tokenABI, tokenAddress);
+
+    // Get token balance using balanceOf function
+    const balance = await tokenContract.methods.balanceOf(address).call();
+    const formattedBalance = web3.utils.fromWei(balance, 'ether');
+
+    // Update token balance on the page
+    const tokenBalanceElement = document.getElementById('tokenBalance');
+    tokenBalanceElement.textContent = formattedBalance;
+    
+    console.log('Token Balance:', formattedBalance);
   }
 
   function connectWallet() {
