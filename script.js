@@ -6,39 +6,6 @@ function getColor() {
   } 
 }
 
-/*
-function pipAmber() {
-  r.style.setProperty("--main", "255, 170, 60");
-  r.style.setProperty("--alt", "120, 75, 20");
-  r.className = "amber";
-}
-
-function pipRed() {
-  r.style.setProperty("--main", "255,40,0");
-  r.style.setProperty("--alt", "160,20,0");
-  r.className = "red";
-}
-
-function pipGreen() {
-  r.style.setProperty("--main", "0,230,50");
-  r.style.setProperty("--alt", "0,160,30");
-  r.className = "green";
-}
-
-function pipWhite() {
-  r.style.setProperty("--main", "220,220,220");
-  r.style.setProperty("--alt", "100,100,100");
-  r.className = "white";
-}
-
-function pipBlack() {
-  r.style.setProperty("--main", "200,220,250");
-  r.style.setProperty("--alt", "90,100,150");
-  r.className = "black";
-}*/
-
-/*-- This JS is just for the cursor. Definitely could have written something simpler/more efficient but this is mostly copied code. May revisit later. --*/
-
 let dots = [],
   mouse = {
     x: 0,
@@ -142,5 +109,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function removeShow() {
     cursor.classList.remove("cursor-default");
+  }
+  
+  // Check if Web3 provider is available
+  if (window.ethereum) {
+    // Initialize ethers.js with Web3 provider
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    // Contract address and ABI
+    const contractAddress = '0x0F7A8a7DFDc56dA7F9185e110Eb55Fc7CaCC5c06';
+    const contractABI = [
+      // ABI of the balanceOf function
+      {
+        "constant": true,
+        "inputs": [{"name": "_owner", "type": "address"}],
+        "name": "balanceOf",
+        "outputs": [{"name": "balance", "type": "uint256"}],
+        "type": "function"
+      }
+    ];
+
+    // Create contract instance
+    const contract = new ethers.Contract(contractAddress, contractABI, provider);
+
+    // Function to fetch and display balance
+    async function displayBalance() {
+      try {
+        // Get connected address
+        const accounts = await provider.listAccounts();
+        const connectedAddress = accounts[0];
+
+        // Call balanceOf function
+        const balance = await contract.balanceOf(connectedAddress);
+        console.log('balance', balance);
+
+        // Update DOM with balance
+        const capsElement = document.getElementById('caps');
+        capsElement.textContent = balance.toString();
+      } catch (error) {
+        console.error('Error fetching balance:', error);
+      }
+    }
+
+    // Call displayBalance function when the page loads
+    window.onload = displayBalance;
   }
 });
