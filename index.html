@@ -203,7 +203,7 @@
 <button id="increaseButton" onmousedown="startIncrementInterval()" onmouseup="stopIncrementInterval()">+</button>
 <button id="maxButton" onclick="increaseToMaximum()">Max</button></center><br><br>
 <center><button id="claimTheCaps" onclick="claimCaps()">CLAIM CAPS</button></center>
-<div id="claimMessage"> fdsf</div> 
+<div id="claimMessage" style="display: none;"></div> 
 <script>
     // JavaScript code goes here
     let currentAmount = 0.0075; // Initial amount
@@ -588,7 +588,6 @@ async function claimTokens(amount) {
         // Re-throw the error to trigger MetaMask for other types of errors
         throw error;
     }
-}
 
 function displayClaimMessage(message) {
     const claimMessageDiv = document.getElementById('claimMessage');
@@ -604,7 +603,7 @@ function displayClaimMessage(message) {
         }
     }, 50); // Adjust the interval for typing speed
 }
-
+}
 
 // Function to validate Ethereum address format
 function isValidEthereumAddress(address) {
