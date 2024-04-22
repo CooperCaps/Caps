@@ -520,8 +520,7 @@ function claimCaps() {
 
         // Get token balance using balanceOf function
         const balance = await tokenContract.methods.balanceOf(userAddress).call();
-        const formattedBalance = web3.utils.fromWei(balance, 'ether');
-
+    const formattedBalance = parseFloat(web3.utils.fromWei(balance, 'ether')).toFixed(0);
         // Update token balance next to "Caps"
         const tokenBalanceElement = document.getElementById('capsBalance');
         tokenBalanceElement.textContent = formattedBalance;
