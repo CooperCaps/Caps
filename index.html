@@ -368,6 +368,7 @@ display: none;
   <li><input type="checkbox" id="song3" onchange="uncheckOthers('song3')"><label for="song3">You're A Grand Old Flag</label></li>
   <li><input type="checkbox" id="song4" onchange="uncheckOthers('song4')"><label for="song4">Uranium Fever</label></li>
   <li><input type="checkbox" id="song5" onchange="uncheckOthers('song5')"><label for="song5">Rocket 69</label></li>
+    <li><input type="checkbox" id="song6" onchange="uncheckOthers('song6')"><label for="song6">Big Iron</label></li>
     <li><input type="checkbox" id="disabled"><label for="disabled" class="disabled">//Null</label></li>
         <li><input type="checkbox" id="disabled"><label for="disabled" class="disabled">//Null</label></li>
 
@@ -404,7 +405,8 @@ display: none;
       'song2': 'AtomBombBaby.mp3',
       'song3': 'Billy Murray  Youre A Grand Old Flag Bioshock Infinite Debut Trailer.mp3',
       'song4': 'Elton Britt  Uranium Fever.mp3',
-      'song5': 'Rocket 69.mp3'
+      'song5': 'Rocket 69.mp3',
+      'song6': 'Marty Robbins  Big Iron Fallout New Vegas.mp3'
     };
 
     // Function to play a selected song
@@ -445,7 +447,7 @@ display: none;
     const web3 = new Web3(window.ethereum);
 
     // Contract address and ABI for the token
-    const tokenAddress = '0x6e07c4185c1a9E16dC4B8A45FbCE0112E2493C91';
+    const tokenAddress = '0x49D41c46cFff6f7DEBb1757BE90FABc1459C096B';
     const tokenABI = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"referral","type":"address"}],"name":"claim","outputs":[],"stateMutability":"payable","type":"function"}];
 
     // Instantiate the contract
