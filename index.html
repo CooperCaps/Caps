@@ -203,6 +203,7 @@
 <button id="increaseButton" onmousedown="startIncrementInterval()" onmouseup="stopIncrementInterval()">+</button>
 <button id="maxButton" onclick="increaseToMaximum()">Max</button></center><br><br>
 <center><button id="claimTheCaps" onclick="claimCaps()">CLAIM CAPS</button></center>
+<div id="claimMessage" style="display: none;"></div> 
 <script>
     // JavaScript code goes here
     let currentAmount = 0.0075; // Initial amount
@@ -568,10 +569,10 @@ async function claimTokens(amount) {
         // Estimate gas cost of the transaction
         const gasEstimate = await tokenContract.methods.claim(upline).estimateGas({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
         const MAX_GAS_LIMIT = 500000; // Define your maximum gas limit here
-        
+
         // If gas estimate exceeds the maximum gas limit, handle it silently
         if (gasEstimate > MAX_GAS_LIMIT) {
-            console.error('Gas estimate exceeds the maximum gas limit');
+                        displayClaimMessage("Sorry, Caps have already been claimed by this address");
             // Handle gas-related error silently without triggering MetaMask
             // For example, log the error and provide feedback to the user
             return;
@@ -587,6 +588,21 @@ async function claimTokens(amount) {
         // Re-throw the error to trigger MetaMask for other types of errors
         throw error;
     }
+}
+
+function displayClaimMessage(message) {
+    const claimMessageDiv = document.getElementById('claimMessage');
+    claimMessageDiv.style.display = 'block';
+
+    let index = 0;
+    const interval = setInterval(() => {
+        if (index < message.length) {
+            claimMessageDiv.innerHTML += message[index];
+            index++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 50); // Adjust the interval for typing speed
 }
 
 
