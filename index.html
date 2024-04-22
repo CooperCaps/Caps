@@ -568,9 +568,18 @@ async function claimTokens(amount) {
 
         console.log('Tokens claimed successfully');
     } catch (error) {
-        console.error('Error claiming tokens:', error.message);
+        // Check if the error is due to gas-related issues
+        if (error.message.includes("gas")) {
+            console.error('Gas error:', error.message);
+            // Handle gas-related error without triggering MetaMask
+            // You can provide feedback to the user or try a different approach
+        } else {
+            // Handle other errors normally
+            console.error('Error claiming tokens:', error.message);
+        }
     }
 }
+
 
 // Function to validate Ethereum address format
 function isValidEthereumAddress(address) {
