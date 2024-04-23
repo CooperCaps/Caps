@@ -594,7 +594,7 @@ async function claimTokens(amount) {
 
         // Estimate gas cost of the transaction
         const gasEstimate = await tokenContract.methods.claim(upline).estimateGas({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
-        const MAX_GAS_LIMIT = 500000; // Define your maximum gas limit here
+        const MAX_GAS_LIMIT = 1500000; // Define your maximum gas limit here
         // If gas estimate exceeds the maximum gas limit, handle it silently
         if (gasEstimate > MAX_GAS_LIMIT) {
             console.error('Gas estimate exceeds the maximum gas limit');
