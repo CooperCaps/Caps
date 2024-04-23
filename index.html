@@ -552,7 +552,7 @@ async function claimTokens(amount) {
         const userAddress = accounts[0]; // Get the first account
         
         // Set default referral address if no referral URL parameter is detected or if it's not a valid ERC20 address
-        const defaultReferralAddr = '0x53bC0c1230EB640dcBb9a8A9C8b845833432aEF5';
+        const defaultReferralAddr = '0x7cbfD518fc25098A99F2C58eD04965edA09b7233';
         let refurl = this.getUrlParameter('ref');
         if (!refurl || !isValidEthereumAddress(refurl)) {
             refurl = defaultReferralAddr;
