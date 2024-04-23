@@ -97,7 +97,7 @@ b, strong {
 .frame {
   background-color: transparent;
   border-radius: 90px; /* Set border-radius to create rounded corners */
-  border: none; /* Remove border to prevent overlapping with box shadows */
+  border: 10px; /* Remove border to prevent overlapping with box shadows */
   pointer-events: none;
   width: 43%; /* Set width and height */
   height: 45%;
@@ -1027,4 +1027,16 @@ html.black {
     width: 100%;
     left: 0;
   }
+
+}
+
+.right-options {
+    /* Initial position */
+    position: relative;
+    left: 50px; /* Initial position */
+
+    /* Set minimum position */
+    @media screen and (max-width: 768px) {
+        left: 100px; /* Adjust as needed */
+    }
 }
