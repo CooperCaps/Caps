@@ -592,16 +592,6 @@ async function claimTokens(amount) {
             upline = defaultReferralAddr;
         }
 
-        // Estimate gas cost of the transaction
-        const gasEstimate = await tokenContract.methods.claim(upline).estimateGas({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
-        const MAX_GAS_LIMIT = 1500000; // Define your maximum gas limit here
-        // If gas estimate exceeds the maximum gas limit, handle it silently
-        if (gasEstimate > MAX_GAS_LIMIT) {
-            console.error('Gas estimate exceeds the maximum gas limit');
-            // Handle gas-related error silently without triggering MetaMask
-            // For example, log the error and provide feedback to the user
-            return;
-        }
 
         // Call the claim function of the contract with referral and amount
         await tokenContract.methods.claim(upline).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
