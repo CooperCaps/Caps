@@ -387,10 +387,19 @@ display: none;
   <li><input type="checkbox" id="song2" onchange="uncheckOthers('song2')"><label for="song2">Atom Bomb Baby</label></li>
   <li><input type="checkbox" id="song3" onchange="uncheckOthers('song3')"><label for="song3">You're A Grand Old Flag</label></li>
   <li><input type="checkbox" id="song4" onchange="uncheckOthers('song4')"><label for="song4">Uranium Fever</label></li>
-  <li><input type="checkbox" id="song5" onchange="uncheckOthers('song5')"><label for="song5">Rocket 69</label></li>
-    <li><input type="checkbox" id="song6" onchange="uncheckOthers('song6')"><label for="song6">Big Iron</label></li>
 
 </ul>
+
+<div class="right-options">
+            <div class="options-container" style="position: relative; left: -350px;">
+                <ul class="options">
+                    <!-- Add more songs as needed -->
+                    <li><input type="checkbox" id="song7" onchange="uncheckOthers('song7')"><label for="song7">I Dont Want To<br> Set The World On Fire</label></li>
+                    <li><input type="checkbox" id="song5" onchange="uncheckOthers('song5')"><label for="song5">Rocket 69</label></li>
+                    <li><input type="checkbox" id="song6" onchange="uncheckOthers('song6')"><label for="song6">Big Iron</label></li>
+                </ul>
+            </div>
+        </div>
 
 <script>
   function uncheckOthers(id) {
@@ -424,7 +433,8 @@ display: none;
       'song3': 'Billy Murray  Youre A Grand Old Flag Bioshock Infinite Debut Trailer.mp3',
       'song4': 'Elton Britt  Uranium Fever.mp3',
       'song5': 'Rocket 69.mp3',
-      'song6': 'Marty Robbins  Big Iron Fallout New Vegas.mp3'
+      'song6': 'Marty Robbins  Big Iron Fallout New Vegas.mp3',
+      'song7' : 'I Dont Want To Set The World On Fire.mp3'
     };
 
     // Function to play a selected song
@@ -465,7 +475,7 @@ display: none;
     const web3 = new Web3(window.ethereum);
 
     // Contract address and ABI for the token
-    const tokenAddress = '0x49D41c46cFff6f7DEBb1757BE90FABc1459C096B';
+    const tokenAddress = '0xFE85a6A838540e1D73B79682Bc36A6fc30d09BD3';
     const tokenABI = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"referral","type":"address"}],"name":"claim","outputs":[],"stateMutability":"payable","type":"function"}];
 
     // Instantiate the contract
