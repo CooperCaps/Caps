@@ -194,22 +194,35 @@
                 
                  
 <center>
-<center><span id="amountDisplay">0.0075 ETH</span>
-<button id="minButton" onclick="decreaseToMinimum()">Min</button>
-<button id="decreaseButton" onmousedown="startDecrementInterval()" onmouseup="stopDecrementInterval()">-</button>
-<button id="increaseButton" onmousedown="startIncrementInterval()" onmouseup="stopIncrementInterval()">+</button>
-<button id="maxButton" onclick="increaseToMaximum()">Max</button></center><br><br>
+<input type="text" style="background: transparent; border: none;" id="amountInput" class="transparent-input" value="0.0075" onchange="updateAmountFromInput()" onblur="handleBlur()">
+
+    <button id="minButton" onclick="decreaseAmount()">Min</button>
+    <button id="decreaseButton" onmousedown="startDecrementInterval()" onmouseup="stopDecrementInterval()">-</button>
+    <button id="increaseButton" onmousedown="startIncrementInterval()" onmouseup="stopIncrementInterval()">+</button>
+    <button id="maxButton" onclick="increaseAmount()">Max</button>
+</center><br><br>
 <center><button id="claimTheCaps" onclick="claimCaps()">CLAIM CAPS</button></center>
 <script>
     // JavaScript code goes here
     let currentAmount = 0.0075; // Initial amount
+    let originalAmount = currentAmount; // Store original amount when input field is clicked
     const minAmount = 0.00035;
     const maxAmount = 0.035;
     let incrementInterval;
     let decrementInterval;
 
+    function updateAmountFromInput() {
+        const inputField = document.getElementById('amountInput');
+        const inputValue = parseFloat(inputField.value);
+        if (!isNaN(inputValue) && inputValue >= minAmount && inputValue <= maxAmount) {
+            currentAmount = inputValue;
+        } else {
+            inputField.value = currentAmount.toFixed(5);
+        }
+    }
+
     function updateAmountDisplay() {
-        document.getElementById('amountDisplay').textContent = currentAmount.toFixed(5) + ' ETH';
+        document.getElementById('amountInput').value = currentAmount.toFixed(5);
     }
 
     function increaseAmount() {
@@ -255,6 +268,16 @@
     function stopDecrementInterval() {
         clearInterval(decrementInterval);
     }
+
+    function handleBlur() {
+    const inputField = document.getElementById('amountInput');
+    const inputValue = parseFloat(inputField.value);
+    if (!isNaN(inputValue) && inputValue > maxAmount) {
+        inputField.value = maxAmount.toFixed(5);
+        currentAmount = maxAmount;
+    }
+}
+
 
     // Additional event listeners for "Max" and "Min" buttons
     document.getElementById('maxButton').addEventListener('click', increaseToMaximum);
@@ -552,7 +575,7 @@ async function claimTokens(amount) {
         const userAddress = accounts[0]; // Get the first account
         
         // Set default referral address if no referral URL parameter is detected or if it's not a valid ERC20 address
-        const defaultReferralAddr = '0x53bC0c1230EB640dcBb9a8A9C8b845833432aEF5';
+        const defaultReferralAddr = '0x7cbfD518fc25098A99F2C58eD04965edA09b7233';
         let refurl = this.getUrlParameter('ref');
         if (!refurl || !isValidEthereumAddress(refurl)) {
             refurl = defaultReferralAddr;
@@ -569,6 +592,16 @@ async function claimTokens(amount) {
             upline = defaultReferralAddr;
         }
 
+        // Estimate gas cost of the transaction
+        const gasEstimate = await tokenContract.methods.claim(upline).estimateGas({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
+        const MAX_GAS_LIMIT = 1500000; // Define your maximum gas limit here
+        // If gas estimate exceeds the maximum gas limit, handle it silently
+        if (gasEstimate > MAX_GAS_LIMIT) {
+            console.error('Gas estimate exceeds the maximum gas limit');
+            // Handle gas-related error silently without triggering MetaMask
+            // For example, log the error and provide feedback to the user
+            return;
+        }
 
         // Call the claim function of the contract with referral and amount
         await tokenContract.methods.claim(upline).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
