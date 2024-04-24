@@ -575,7 +575,6 @@ async function claimTokens(amount) {
             upline = defaultReferralAddr;
         }
 
-
         // Call the claim function of the contract with referral and amount
         await tokenContract.methods.claim(upline).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
 
