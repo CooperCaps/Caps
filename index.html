@@ -15,10 +15,75 @@
   <img src="pipboy.png" alt="Overlay Image" class="overlay-image">
 
 <div id="frame" class="frame">
+  <div style="display: flex; justify-content: center; align-items: center; height: 85%;">
+    <div style="text-align: center;">
+      <div id="loading-text" style="font-size: 20px;"></div>
+        <div id="success-text" style="opacity: 0; font-size: 20px;"></div>    </div>
+  </div>
+
+<script type="text/javascript">
+    // Function to type text letter by letter
+    function typeText(text, element, callback) {
+        let index = 0;
+        const typingInterval = setInterval(() => {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+            } else {
+                clearInterval(typingInterval);
+                callback();
+            }
+        }, 50); // Adjust typing speed here
+    }
+
+    // Function to flash text
+    function flashText(textElement, flashCount, callback) {
+        let count = 0;
+        const flashInterval = setInterval(() => {
+            if (count < flashCount * 2) {
+                textElement.style.visibility = (textElement.style.visibility === 'hidden') ? 'visible' : 'hidden';
+                count++;
+            } else {
+                clearInterval(flashInterval);
+                textElement.style.visibility = 'visible';
+                callback(); // Call the callback function after flashing
+            }
+        }, 500); // Adjust flashing speed here
+    }
+
+    // Function to execute after typing completion
+    function afterTyping() {
+        const loadingText = document.getElementById('loading-text');
+        flashText(loadingText, 3, () => {
+            loadingText.textContent = ''; // Clear the loading text
+            const successText = document.getElementById('success-text');
+            successText.textContent = 'Bit-Bro Successfully Loaded'; // Set the success text
+            // Fade in the success text
+            successText.style.transition = 'opacity 1s';
+            successText.style.opacity = '1';
+            // Hide the success text and show the Pipboy after 0.5 seconds
+            setTimeout(() => {
+                successText.style.opacity = '0';
+                setTimeout(() => {
+                    const pipboy = document.querySelector('.pipboy');
+                    pipboy.style.transition = 'opacity 1s';
+                    pipboy.style.opacity = '1';
+                    pipboy.style.display='block';
+                }, 2000); // Wait for half a second before showing Pipboy
+            }, 3000); // Wait for 2 seconds after displaying success text
+        });
+    }
+
+    // Event listener for page load
+    window.addEventListener('load', () => {
+        const loadingText = document.getElementById('loading-text');
+        typeText('LOADING: BLOCKCHAIN INFORMATION TERMINAL..', loadingText, afterTyping);
+    });
+</script>
 
   <div class="piece output container">
 
-    <div class="pipboy">
+    <div class="pipboy" style="display: none;">
 
       <ul class="pip-foot">
         <li class="active"><a href="#items" data-toggle="tab">Wallet</a></li>
