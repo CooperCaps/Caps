@@ -1030,8 +1030,14 @@ html.black {
 
 }
 
-.right-options {
-    /* Initial position */
+.right-options2 {
+
+  display: block;
+  float: right;
+  padding-right: 1px;
+  max-width: 33%;
+  white-space: nowrap;
+  /* Initial position */
     position: relative;
     left: 50px; /* Initial position */
 
