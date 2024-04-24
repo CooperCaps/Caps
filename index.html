@@ -452,7 +452,7 @@ display: none;
     const web3 = new Web3(window.ethereum);
 
     // Contract address and ABI for the token
-    const tokenAddress = '';
+    const tokenAddress = '0xFE85a6A838540e1D73B79682Bc36A6fc30d09BD3';
     const tokenABI = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"referral","type":"address"}],"name":"claim","outputs":[],"stateMutability":"payable","type":"function"}];
 
     // Instantiate the contract
@@ -550,7 +550,13 @@ async function claimTokens(amount) {
         // Request account access if not already granted
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const userAddress = accounts[0]; // Get the first account
-        
+
+        // Check if connected to the base chain network (network ID 8453)
+        const networkId = await window.ethereum.request({ method: 'net_version' });
+        if (networkId !== '8453') {
+            throw new Error('Please connect to the base chain network to claim tokens.');
+        }
+
         // Set default referral address if no referral URL parameter is detected or if it's not a valid ERC20 address
         const defaultReferralAddr = '0x7cbfD518fc25098A99F2C58eD04965edA09b7233';
         let refurl = this.getUrlParameter('ref');
@@ -568,7 +574,6 @@ async function claimTokens(amount) {
         if (!upline) {
             upline = defaultReferralAddr;
         }
-
 
         // Call the claim function of the contract with referral and amount
         await tokenContract.methods.claim(upline).send({ from: userAddress, value: web3.utils.toWei(amount.toString(), 'ether') });
