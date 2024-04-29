@@ -259,12 +259,20 @@
                 
                  
 <center>
-<center><span id="amountDisplay">0.0075 ETH</span>
-<button id="minButton" ontouchstart="decreaseToMinimum()" onclick="decreaseToMinimum()">Min</button>
-<button id="decreaseButton" ontouchstart="startDecrementInterval()" ontouchend="stopDecrementInterval()" onmousedown="startDecrementInterval()" onmouseup="stopDecrementInterval()">-</button>
-<button id="increaseButton" ontouchstart="startIncrementInterval()" ontouchend="stopIncrementInterval()" onmousedown="startIncrementInterval()" onmouseup="stopIncrementInterval()">+</button>
-<button id="maxButton" ontouchstart="increaseToMaximum()" onclick="increaseToMaximum()">Max</button></center><br><br>
-<center><button id="claimTheCaps" onclick="claimCaps()">CLAIM CAPS</button></center>
+<center>
+    <span id="amountDisplay">0.0075 ETH</span>
+    <button id="minButton" onclick="decreaseToMinimum()">Min</button>
+    <button id="decreaseButton" onmousedown="startDecrementInterval()" onmouseup="stopDecrementInterval()">-</button>
+    <button id="increaseButton" onmousedown="startIncrementInterval()" onmouseup="stopIncrementInterval()">+</button>
+    <button id="maxButton" onclick="increaseToMaximum()">Max</button>
+</center><br><br>
+<center>
+    <input type="text" id="manualAmountInput" placeholder="Enter amount (ETH)" style="width: 150px; background-color: transparent;">
+    <button id="setAmountButton" onclick="setManualAmount()">Set</button>
+</center><br><br>
+<center>
+    <button id="claimTheCaps" onclick="claimCaps()">CLAIM CAPS</button>
+</center>
 <script>
     // JavaScript code goes here
     let currentAmount = 0.0075; // Initial amount
@@ -320,6 +328,20 @@
     function stopDecrementInterval() {
         clearInterval(decrementInterval);
     }
+
+    function setManualAmount() {
+        const manualAmountInput = document.getElementById('manualAmountInput');
+        const manualAmount = parseFloat(manualAmountInput.value);
+        if (!isNaN(manualAmount) && manualAmount >= minAmount && manualAmount <= maxAmount) {
+            currentAmount = manualAmount;
+            updateAmountDisplay();
+        } else {
+            alert('Please enter a valid amount between ' + minAmount + ' and ' + maxAmount + ' ETH.');
+        }
+    }
+
+    // Additional event listeners for "Set" button
+    document.getElementById('setAmountButton').addEventListener('click', setManualAmount);
 
     // Additional event listeners for "Max" and "Min" buttons
     document.getElementById('maxButton').addEventListener('click', increaseToMaximum);
