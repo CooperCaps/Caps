@@ -107,8 +107,8 @@ b, strong {
   position: fixed;
   z-index: 1;
   /* Manually adjust position */
-  top: 40%; /* Adjust vertically */
-  left: 42.5%; /* Adjust horizontally */
+  top: 39.5%; /* Adjust vertically */
+  left: 49.3%; /* Adjust horizontally */
   transform: translate(-50%, -50%); /* Center the element */
 }
 /* Media query for mobile devices */
@@ -1046,3 +1046,5 @@ html.black {
         left: 100px; /* Adjust as needed */
     }
 }
+
+
