@@ -689,15 +689,23 @@ a:hover {
   display: none;
 }
 
+
+
 .vboy {
   height: 180px;
+  width: 180px; /* Set width equal to height to maintain circular shape */
   pointer-events: none;
-  background-image: url("https://cybersandbox.ca/resources/vaultboy-tp.gif");
-  background-position: 60% center;
+  background-image: url("https://github.com/RedPillPhil/pipboy/blob/main/171444634172156197.png?raw=true");
+  background-size: 180px 180px; /* Set equal width and height to maintain circular shape */
+  background-position: 50% 50%; /* Center the background image */
   background-repeat: no-repeat;
+  margin-left: 70px;
+  transform-origin: center center; /* Rotate from the center of the image */
+  border-radius: 50%; /* Make sure the container is a circle */
   -webkit-filter: hue-rotate(-52deg) saturate(0.9);
   filter: hue-rotate(-52deg) saturate(0.9);
 }
+
 
 .item-icon {
   position: absolute;
