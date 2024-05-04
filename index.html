@@ -6,6 +6,9 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
+<script src="./script.js"></script>
 
 
 </head>
@@ -176,7 +179,7 @@
                 <div class="stats-page">
                   <h4>DETAILS</h4>
                   <ul>
-                    <li><b>Caps</b> <span id="capsBalance">Loading</span></li>
+                    <p>CAPS Balance: <span id="capsBalance">Loading...</span></p>
     <input type="text" id="depositAmount" placeholder="Deposit Amount" style="background-color: transparent;" />
     <input type="text" id="lockPeriod" placeholder="Lock Period (weeks)" style="background-color: transparent;" />
     <button onclick="deposit()">Stake</button>
@@ -551,9 +554,6 @@ display: none;
   </div>
 </div>
 <!-- partial -->
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
-<script src="./script.js"></script>
 <script>
     // Initialize Web3
     const web3 = new Web3(window.ethereum);
