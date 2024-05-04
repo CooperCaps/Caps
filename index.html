@@ -6,9 +6,6 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
-<script src="./script.js"></script>
 
 
 </head>
@@ -104,7 +101,7 @@
           <li> <span id="address" onclick="connectWallet()">CONNECT TO BASECHAIN</span></li>
             <li><b>HP</b> ???</li>
             <li><span class="fade-a"><b>DT</b> ???</span><span class="fade-b"><b>DR</b> ???</span></li>
-              <li><b>Caps</b> <span id="capsBalance">Loading</span></li> 
+              <li><b>Caps</b> <span id="capsBalance1">Loading</span></li> 
           </ul>
           <div class="pip-body">
             <ul class="options">
@@ -179,7 +176,7 @@
                 <div class="stats-page">
                   <h4>DETAILS</h4>
                   <ul>
-                    <p>CAPS Balance: <span id="capsBalance">Loading...</span></p>
+                    <p>CAPS Balance: <span id="capsBalance2">Loading...</span></p>
     <input type="text" id="depositAmount" placeholder="Deposit Amount" style="background-color: transparent;" />
     <input type="text" id="lockPeriod" placeholder="Lock Period (weeks)" style="background-color: transparent;" />
     <button onclick="deposit()">Stake</button>
@@ -554,6 +551,9 @@ display: none;
   </div>
 </div>
 <!-- partial -->
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
+<script src="./script.js"></script>
 <script>
     // Initialize Web3
     const web3 = new Web3(window.ethereum);
@@ -623,23 +623,32 @@ function claimCaps() {
 
 
     // Function to get token balance
-    async function getTokenBalance() {
-      try {
+async function getTokenBalances() {
+    try {
         // Request account access if not already granted
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const userAddress = accounts[0]; // Get the first account
         updateWalletInfo(userAddress);
 
-        // Get token balance using balanceOf function
-        const balance = await tokenContract.methods.balanceOf(userAddress).call();
-    const formattedBalance = parseFloat(web3.utils.fromWei(balance, 'ether')).toFixed(0);
-        // Update token balance next to "Caps"
-        const tokenBalanceElement = document.getElementById('capsBalance');
-        tokenBalanceElement.textContent = formattedBalance;
-      } catch (error) {
+        // Get token balances using balanceOf function for both IDs
+        const balance1 = await tokenContract.methods.balanceOf(userAddress).call();
+        const balance2 = await tokenContract.methods.balanceOf(userAddress).call();
+
+        // Convert balances to formatted strings
+        const formattedBalance1 = parseFloat(web3.utils.fromWei(balance1, 'ether')).toFixed(0);
+        const formattedBalance2 = parseFloat(web3.utils.fromWei(balance2, 'ether')).toFixed(0);
+
+        // Update token balances for both IDs
+        const tokenBalanceElement1 = document.getElementById('capsBalance1');
+        tokenBalanceElement1.textContent = formattedBalance1;
+
+        const tokenBalanceElement2 = document.getElementById('capsBalance2');
+        tokenBalanceElement2.textContent = formattedBalance2;
+    } catch (error) {
         console.error('Error:', error);
-      }
     }
+}
+
 
     // Function to connect wallet
     function connectWallet() {
