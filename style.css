@@ -1063,4 +1063,7 @@ html.black {
     }
 }
 
+.indented-section {
+    padding-left: 5px; /* Adjust the amount of indentation as needed */
+}
 
