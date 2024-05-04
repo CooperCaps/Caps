@@ -156,7 +156,7 @@
           </ul>
           <div class="pip-body">
             <ul class="side-menu">
-              <li class="active"><a href="#cnd" data-toggle="tab">EARN</a></li>
+              <li class="active"><a href="#cnd" data-toggle="tab">***</a></li>
               <li><a href="#rad" data-toggle="tab">CAPS</a></li>
               <li><a href="#eff" data-toggle="tab">CAPS/ETH</a></li>
               <li class="disabled"><a href="#">CAPS/USDT</a></li>
@@ -164,10 +164,10 @@
             <div class="tab-content">
               <div class="tab-pane fade in active" id="cnd">
                 <div class="stats-page">
-                  <h4>Rewards</h4>
+                  <h4>Total Rewards</h4>
 
                   <div class="right-options">
-                    <a href="#">(0) CAPS EARNED</a>
+                    <a href="#">(0) TOTAL CAPS EARNED</a>
                     
                   </div>
                 </div>
@@ -176,7 +176,64 @@
                 <div class="stats-page">
                   <h4>DETAILS</h4>
                   <ul>
-                    <li>No data.</li>
+                    <p>CAPS Balance: <span id="capsBalance">Loading...</span></p>
+    <input type="text" id="depositAmount" placeholder="Deposit Amount" style="background-color: transparent;" />
+    <input type="text" id="lockPeriod" placeholder="Lock Period (weeks)" style="background-color: transparent;" />
+    <button onclick="deposit()">Stake</button>
+    <br><br>
+    <input type="text" id="unstakeAmount" placeholder="Unstake Amount" style="background-color: transparent;" />
+     <button onclick="deposit()">Unstake</button>
+         <br><br>
+    <p id="lockPeriodInfo">Lock Length: 34 Weeks</p>
+    <p id="pendingRewards">APY: 73.6%</p>
+    <center> <button onclick="claimRewards()">Claim Rewards</button><p id="pendingRewards">Unclaimed: 36.734</p></center>
+   <p style="font-size: small;">(All information displayed is placeholder information, please do not attempt to interact)</p>
+
+
+    <script>
+        // Initialize Web3
+        const web3 = new Web3(window.ethereum);
+
+        // Contract address and ABI for the token
+        const tokenAddress = '0xFE85a6A838540e1D73B79682Bc36A6fc30d09BD3';
+        const tokenABI = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"referral","type":"address"}],"name":"claim","outputs":[],"stateMutability":"payable","type":"function"}];
+
+        // Instantiate the contract
+        const tokenContract = new web3.eth.Contract(tokenABI, tokenAddress);
+
+        const stakingAddress = '';
+        const stakingABI = [];
+        const stakingContract = new web3.eth.Contract(stakingABI, stakingAddress);
+
+
+        async function deposit() {
+            const depositAmount = document.getElementById('depositAmount').value;
+            const lockPeriod = document.getElementById('lockPeriod').value;
+            // Call your contract's deposit function with depositAmount and lockPeriod
+        }
+
+        async function claimRewards() {
+            // Call your contract's claimRewards function
+        }
+
+        async function getTokenBalance() {
+            try {
+                // Request account access if not already granted
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const userAddress = accounts[0]; // Get the first account
+
+                // Get token balance using balanceOf function
+                const balance = await tokenContract.methods.balanceOf(userAddress).call();
+                const formattedBalance = parseFloat(web3.utils.fromWei(balance, 'ether')).toFixed(0);
+                // Update token balance next to "Caps"
+                const tokenBalanceElement = document.getElementById('capsBalance');
+                tokenBalanceElement.textContent = formattedBalance;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+    </script>
                   </ul>
                 </div>
               </div>
