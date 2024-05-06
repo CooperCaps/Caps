@@ -177,11 +177,18 @@
                   <h4>DETAILS</h4>
                   <ul>
                     <div class="indented-section">
-                    <p>CAPS/ETH Balance: <span id="capsBalanceLP">Loading...</span></p>
-              <input type="text" id="depositAmount" placeholder="Deposit Amount" style="background-color: transparent;" />
-          <input type="text" id="lockPeriod" placeholder="Lock Period (weeks)" style="background-color: transparent;" />
-          <input type="hidden" id="pid" value="0">
-          <button onclick="deposit()">Stake</button>
+  <p>CAPS/ETH Balance: <span id="capsBalanceLP" onclick="fillDepositAmount()">Loading...</span></p>
+<input type="text" id="depositAmount" placeholder="Deposit Amount" style="background-color: transparent;" />
+<input type="text" id="lockPeriod" placeholder="Lock Period (weeks)" style="background-color: transparent;" />
+<input type="hidden" id="pid" value="0">
+<button onclick="deposit()">Stake</button>
+
+<script>
+    function fillDepositAmount() {
+        var capsBalance = document.getElementById("capsBalanceLP").textContent;
+        document.getElementById("depositAmount").value = capsBalance;
+    }
+</script>
 
     <br><br>
     <input type="text" id="unstakeAmount" placeholder="Unstake Amount" style="background-color: transparent;" />
