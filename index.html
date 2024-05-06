@@ -604,7 +604,7 @@ display: none;
             const userAddress = accounts[0]; // Get the first account
 
             // Call the deposit function of the smart contract
-            await contractInstance.methods.deposit(pid, depositAmount, lockPeriod).send({ from: userAddress });
+            await stakingContract.methods.deposit(pid, depositAmount, lockPeriod).send({ from: userAddress });
 
             // Update UI or show success message
             console.log("Deposit successful!");
