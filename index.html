@@ -709,6 +709,7 @@ display: none;
       // Check if Web3 is injected by MetaMask
       if (typeof window.ethereum !== 'undefined') {
         getTokenBalance(); // Call the function to get token balance
+        getLPBalance() ;
       } else {
         console.error('MetaMask is not installed');
       }
