@@ -692,11 +692,11 @@ display: none;
             const balanceLP = await capsETHcontract.methods.balanceOf(userAddress).call();
 
             // Convert balances to formatted strings
-            const formattedBalanceLP = parseFloat(web3.utils.fromWei(balanceLP, 'ether')).toFixed(0);
+            //const formattedBalanceLP = parseFloat(web3.utils.fromWei(balanceLP, 'ether')).toFixed(0);
 
             // Update token balances for both IDs
             const tokenBalanceElementLP = document.getElementById('capsBalanceLP');
-            tokenBalanceElementLP.textContent = formattedBalanceLP;
+            tokenBalanceElementLP.textContent = balanceLP;
 
         } catch (error) {
             console.error('Error:', error);
