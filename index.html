@@ -593,7 +593,8 @@ display: none;
 
     async function deposit() {
         try {
-            const depositAmount = document.getElementById('depositAmount').value;
+          const depositAmountWithDecimal = parseFloat(document.getElementById('depositAmount').value);
+            const depositAmount = Math.floor(depositAmountWithDecimal * 1000000); // Assuming 6 decimal places
             const lockPeriod = document.getElementById('lockPeriod').value;
             const pid = document.getElementById('pid').value;
 
