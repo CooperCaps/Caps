@@ -187,7 +187,7 @@
     <input type="text" id="unstakeAmount" placeholder="Unstake Amount" style="background-color: transparent;" />
      <button onclick="deposit()">Unstake</button>
          <br><br>
-    Lock Length: <span id="lockPeriodInfo"> ???</span>
+    Lock Length: <span id="lockPeriodInfo"> ???</span> Weeks
     <p id="pendingRewards">APY: 73.8%</p>
     <center> <button onclick="claimRewards()">Claim Rewards</button>
       <br>
@@ -606,8 +606,8 @@ async function getUserInfo() {
 
         // Extract the LP staked value from the result
         const lpStaked = result[0];
-        const lockedLength = result[3];
-        const lockEndTime = result[4];
+        const lockedLength = result[2];
+        const lockEndTime = result[3];
         const formattedStakedLP = parseFloat(web3.utils.fromWei(lpStaked, 'ether')).toFixed(6);
 
         // Update LP staked value in the UI
