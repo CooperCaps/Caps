@@ -740,6 +740,7 @@ async function getUserInfo() {
       if (typeof window.ethereum !== 'undefined') {
         getTokenBalance(); // Call the function to get token balance
         getLPBalance() ;
+        getUserInfo();
       } else {
         console.error('MetaMask is not installed');
       }
