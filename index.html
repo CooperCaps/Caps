@@ -183,13 +183,6 @@
 <input type="hidden" id="pid" value="0">
 <button onclick="deposit()">Stake</button>
 
-<script>
-    function fillDepositAmount() {
-        var capsBalance = document.getElementById("capsBalanceLP").textContent;
-        document.getElementById("depositAmount").value = capsBalance;
-    }
-</script>
-
     <br><br>
     <input type="text" id="unstakeAmount" placeholder="Unstake Amount" style="background-color: transparent;" />
      <button onclick="deposit()">Unstake</button>
@@ -219,6 +212,20 @@
             </div>
           </div>
         </div>
+
+        
+<script>
+    function fillDepositAmount() {
+        var capsBalance = document.getElementById("capsBalanceLP").textContent;
+        document.getElementById("depositAmount").value = capsBalance;
+    }
+
+        function fillWithDrawAmount() {
+        var capsBalance = document.getElementById("capsStakedLP").textContent;
+        document.getElementById("unstakeAmount").value = capsBalance;
+    }
+</script>
+
 
         <div class="tab-pane fade" id="quests">
           <h3 class="pip-title">Swap</h3>
