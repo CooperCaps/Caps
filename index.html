@@ -174,7 +174,7 @@
               </div>
               <div class="tab-pane fade" id="rad">
                 <div class="stats-page">
-                  <h4> LP Balance: <span id="capsBalanceLP" onclick="fillDepositAmount()">Loading...</span><span style="float: right;"> LP Staked: <span id="capsBalanceLP" onclick="">Loading...</span></span></h4>
+                  <h4> LP Balance: <span id="capsBalanceLP" onclick="fillDepositAmount()">Loading...</span><span style="float: right;"> LP Staked: <span id="capsStakedLP" onclick="">Loading...</span></span></h4>
                   <ul>
                     <br>
                     <div class="indented-section">
@@ -589,6 +589,28 @@ display: none;
       const addressElement = document.getElementById('address');
       addressElement.textContent = address.slice(0, 6) + '....' + address.slice(-6);
     }
+async function getUserInfo() {
+    try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const userAddress = accounts[0]; // Get the first account
+
+        // Call the getUserInfo function of the smart contract
+        const result = await stakingContract.methods.getUserInfo(0, userAddress).call();
+
+        // Extract the LP staked value from the result
+        const lpStaked = result[0];
+        const formattedStakedLP = parseFloat(web3.utils.fromWei(lpStaked, 'ether')).toFixed(6);
+
+        // Update LP staked value in the UI
+        const capsStakedLPElement = document.getElementById('capsStakedLP');
+        capsStakedLPElement.textContent = formattedStakedLP;
+
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+        throw error; // Rethrow the error for handling elsewhere
+    }
+}
+
 
 
     async function deposit() {
