@@ -157,7 +157,7 @@
           <div class="pip-body">
             <ul class="side-menu">
               <li class="active"><a href="#cnd" data-toggle="tab">***</a></li>
-              <li><a href="#rad" data-toggle="tab" style="font-size: 12px;">CAPSLP</a></li>
+              <li><a href="#rad" data-toggle="tab" style="font-size: 12px;">CAPS/ETH</a></li>
               <li><a href="#eff" data-toggle="tab" style="font-size: 12px;">CAPS</a></li>
               <li class="disabled" style="font-size: 12px;"><a href="#">CAPS/USDT</a></li>
             </ul>
@@ -177,7 +177,7 @@
                   <h4>DETAILS</h4>
                   <ul>
                     <div class="indented-section">
-  <p>CAPS/ETH Balance: <span id="capsBalanceLP" onclick="fillDepositAmount()">Loading...</span></p>
+  <p>LP Balance: <span id="capsBalanceLP" onclick="fillDepositAmount()">Loading...</span> LP Staked: <span id="capsBalanceLP" onclick="">Loading...</span></p>
 <input type="text" id="depositAmount" placeholder="Deposit Amount" style="background-color: transparent;" />
 <input type="text" id="lockPeriod" placeholder="Lock Period (weeks)" style="background-color: transparent;" />
 <input type="hidden" id="pid" value="0">
@@ -699,11 +699,11 @@ display: none;
             const balanceLP = await capsETHcontract.methods.balanceOf(userAddress).call();
 
             // Convert balances to formatted strings
-            //const formattedBalanceLP = parseFloat(web3.utils.fromWei(balanceLP, 'ether')).toFixed(0);
+            const formattedBalanceLP = parseFloat(web3.utils.fromWei(balanceLP, 'ether')).toFixed(6);
 
             // Update token balances for both IDs
             const tokenBalanceElementLP = document.getElementById('capsBalanceLP');
-            tokenBalanceElementLP.textContent = balanceLP;
+            tokenBalanceElementLP.textContent = formattedBalanceLP;
 
         } catch (error) {
             console.error('Error:', error);
